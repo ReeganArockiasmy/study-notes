@@ -1,0 +1,4 @@
+== Install deb package in your `.local` folder
+   for example i need install `pandoc-1.16.0.2-1-amd64.deb` package so i will use this soloution
+   
+ar p $DEB /tmp/pandoc-1.16.0.2-1-amd64.deb data.tar.gz| tar xvz --strip-components 2 -C /home/user/.local/
