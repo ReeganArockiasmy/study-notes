@@ -2,3 +2,35 @@
    for example i need install `pandoc-1.16.0.2-1-amd64.deb` package so i will use this soloution
    
 ar p $DEB /tmp/pandoc-1.16.0.2-1-amd64.deb data.tar.gz| tar xvz --strip-components 2 -C /home/user/.local/
+
+== Add a timestamp to your bash history
+
+       $ export HISTTIMEFORMAT="%d/%m%y %T "
+       ```
+       $ history
+       3  06/30/16/542016 09:54:20 cd /etc/manpath.config 
+       4  06/30/16/542016 09:54:20 cat /etc/manpath.config 
+       5  06/30/16/542016 09:54:20 cat /etc/manpath.config  | less
+       6  06/30/16/542016 09:54:20 which vim
+       7  06/30/16/542016 09:54:20 cd /usr/share/man
+       8  06/30/16/542016 09:54:20 ls
+       9  06/30/16/542016 09:54:20 cd man5
+       10  06/30/16/542016 09:54:20 ls
+       11  06/30/16/542016 09:54:20 cd ..
+       ```
+       If you want to make this permanent ,add your `.basrhr` file
+
+== Share your immediate bash history across multiple session
+
+add this to your `.bashrc ` file
+    ```
+    export HISTCONTROL=ignoredups:erasedups  
+    shopt -s histappend  
+    export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+    ```
+    Now, let me explain how it works:
+
+    * The first statement will avoid duplicate entries in your command history.
+    * The second statement appends the history to your history file, instead of rewriting it.
+    * The third statement will set the PROMPT_COMMAND variable with the commands that will save the file, cleanup the in-memory command history stack, and reload the file from the disk again. The PROMPT_COMMAND variable contents are executed every time you execute a command in the shell session, or when you just press Enter, and then when the history stack is updated in the current session.
+
